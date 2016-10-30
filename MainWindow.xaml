@@ -1,0 +1,113 @@
+﻿<Window x:Class="DrawingApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Easy Draw" WindowStartupLocation="CenterScreen" WindowState="Maximized" ResizeMode="NoResize" WindowStyle="None" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="10" />
+        </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <Style x:Key="RecToolStyle" TargetType="Rectangle">
+                <Setter Property="Height" Value="30" />
+                <Setter Property="Width" Value="30" />
+                <Setter Property="Stroke" Value="White" />
+                <Setter Property="Margin" Value="6 2" />
+            </Style>
+            <Style x:Key="LineToolStyle" TargetType="Line">
+                <Setter Property="X1" Value="0" />
+                <Setter Property="X2" Value="30" />
+                <Setter Property="Y1" Value="15" />
+                <Setter Property="Y2" Value="15" />
+                <Setter Property="Stroke" Value="Black" />
+                <Setter Property="Margin" Value="6 2 " />
+            </Style>
+            <Style x:Key="ImageStyle" TargetType="Image">
+                <Setter Property="Height" Value="30" />
+                <Setter Property="Width" Value="30" />
+                <Setter Property="Margin" Value="6 2" />
+            </Style>
+        </Grid.Resources>
+        
+        <Border Grid.Column="0" Grid.RowSpan="4" Background="Gray" />
+        <Border Grid.ColumnSpan="3" Grid.Row="0" Background="Gray" />
+        <Border Grid.Column="2" Grid.RowSpan="4" Background="Gray" />
+        <Border Grid.ColumnSpan="3" Grid.Row="3" Background="Gray" />
+
+        <Canvas Grid.Row="1" Grid.Column="1" Name="_mainCanvas" Background="White" MouseLeftButtonDown="OnMouseDown" MouseMove="OnMouseMove" MouseLeftButtonUp="OnMouseUp" />
+        
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" MouseLeftButtonDown="OnToolSelect">
+            <Rectangle Name="_blackBrush" Fill="Black" Style="{StaticResource RecToolStyle}" />
+            <Rectangle Name="_redBrush" Fill="Red" Style="{StaticResource RecToolStyle}" />
+            <Rectangle Name="_blueBrush" Fill="Blue" Style="{StaticResource RecToolStyle}" />
+            <Rectangle Name="_greenBrush" Fill="Green" Style="{StaticResource RecToolStyle}" />
+            <Rectangle Name="_yellowBrush" Fill="Yellow" Style="{StaticResource RecToolStyle}" />
+            
+            <Separator Width="30" Background="White"/>
+          
+            <Line Name="_stroke1" StrokeThickness="10" Style="{StaticResource LineToolStyle}" />
+            <Line Name="_stroke2" StrokeThickness="20" Style="{StaticResource LineToolStyle}" />
+            <Line Name="_stroke3" StrokeThickness="30" Style="{StaticResource LineToolStyle}" />
+            <Line Name="_stroke4" StrokeThickness="40" Style="{StaticResource LineToolStyle}" />
+            
+            <Separator Width="30" Background="White" />
+
+            <StackPanel Height="40" Width="40">
+                <Image Name="Eraser" Source="Icons\Eraser.png" Style="{StaticResource ImageStyle}" />
+            </StackPanel>
+
+
+            <StackPanel Height="40" Width="40">
+                <Image Name="Clear" Source="Icons\document_blank_100462.jpg" Style="{StaticResource ImageStyle}" />
+            </StackPanel>
+            
+            <Image Name="Save" Source="Icons\Save-icon.png" Visibility="Hidden" Style="{StaticResource ImageStyle}" />
+            <Image Name="Open" Source="Icons\1456113877_open-file.png" Visibility="Hidden" Style="{StaticResource ImageStyle}" />
+            <Image Name="Unlock" Source="Icons\Key.png" Style="{StaticResource ImageStyle}"/>
+            
+            <Popup Name="GrownUpTest" Placement="Mouse">
+                <StackPanel Orientation="Vertical" Background="White">
+                    <Label Content="Complete the problem to unlock" />
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label Name="First" Content="4" />
+                        <Label Name="Operation" Content="X" />
+                        <Label Name="Second" Content="4" />
+                        <Label Content="=" />
+                        <TextBox Name="Answer" Width="30" Height="20" VerticalAlignment="Center" TextAlignment="Center" MaxLength="3"/>
+                    </StackPanel>
+                    <Button Content="Submit" Click="OnSubmitAnswer" IsDefault="True" />
+                </StackPanel>
+            </Popup>
+            
+            <Popup Name="GrownUpControl" Placement="Mouse">
+                <StackPanel Orientation="Vertical">
+                    <Button Name="AllowSaveBtn" Content="Allow Save" Background="Blue" Foreground="White"  FontSize="18" FontWeight="Bold" Padding="5" Click="OnChangePermission" />
+                    <Separator />
+                    <Button Content="Close App" Background="Red"  Foreground="White" FontSize="18" FontWeight="Bold" Padding="5" Click="OnCloseApp"/>
+                    <Separator />
+                    <Button Content="Credits" Background="Green" Foreground="White" FontSize="18" FontWeight="Bold" Padding="5" Click="OnShowCredits" />
+                </StackPanel>
+            </Popup>
+
+            <Popup Name="Credits" Placement="Mouse">
+                <StackPanel Orientation="Vertical" Background="White">
+                    <Label Content="Paint Brush Icon: http://icons8.com" />
+                    <Label Content="Eraser Icon: http://www.iconsmind.com" />
+                    <Label Content="Blank Paper Icon: Hopstarter (Jojo Mendoza) http://hopstarter.deviantart.com" />
+                    <Label Content="Key Icon: http://icons8.com" />
+                    <Label Content="Open File Icon: Custom Icon Design" />
+                    <Label Content="Save Icon: Custom Icon Design" />
+                </StackPanel>
+            </Popup>
+
+        </StackPanel>
+    </Grid>
+    
+</Window>
